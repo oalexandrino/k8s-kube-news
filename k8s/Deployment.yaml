@@ -3,19 +3,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: postgres  # Nome do deployment
+  name: postgresql  # Nome do deployment
 spec:
   replicas: 1  # Número de pods
   selector:
     matchLabels:
-      app: postgres  # Seleciona pods com esse label
+      app: postgresql  # Seleciona pods com esse label
   template:
     metadata:
       labels:
-        app: postgres  # Label usada pelo selector
+        app: postgresql  # Label usada pelo selector
     spec:
       containers:
-        - name: postgres  # Nome do container
+        - name: postgresql  # Nome do container
           image: postgres:16  # Imagem do PostgreSQL
           ports:
             - containerPort: 5432  # Porta exposta pelo container
@@ -30,30 +30,17 @@ spec:
           emptyDir: {}  # Volume temporário (não persiste após reiniciar o pod)
 
 ---
+
 # Service para expor o PostgreSQL internamente no cluster
 
 apiVersion: v1
 kind: Service
 metadata:
-  name: postgres  # Nome do service
+  name: postgresql  # Nome do service
 spec:
   type: ClusterIP  # Tipo padrão, acessível apenas dentro do cluster
   ports:
     - port: 5432  # Porta exposta pelo service
       targetPort: 5432  # Porta do container
   selector:
-    app: postgres  # Seleciona pods com
-
-
-apiVersion: v1
-metadata:
-  name:  kube-news
-spec:
-  selector:
-    app:  kube-news
-  type: NodePort
-  ports:
-  - name:  http
-    port:  80
-    targetPort:  8080
-    nodePort:  30000
+    app: postgresql  # Seleciona pods com
