@@ -3,6 +3,7 @@ kind: ConfigMap
 metadata:
   name: app-variaveis-ambiente-kube-news-app
 data:
-  POSTGRES_DB: "kube_news"
-  POSTGRES_USER: "kubeuser"
-  POSTGRES_PASSWORD: "kubepassword"
+  DB_DATABASE: "kube_news"
+  DB_USERNAME: "kubeuser"
+  DB_PASSWORD: "kubepassword"
+  DB_HOST: "postgresql"
