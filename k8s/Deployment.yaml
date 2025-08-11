@@ -19,13 +19,9 @@ spec:
           image: postgres:16  # Imagem do PostgreSQL
           ports:
             - containerPort: 5432  # Porta exposta pelo container
-          env:
-            - name: POSTGRES_DB
-              value: kube_news  # Nome do banco de dados padrão
-            - name: POSTGRES_USER
-              value: kubeuser  # Usuário padrão
-            - name: POSTGRES_PASSWORD
-              value: kubepassword  # Senha do usuário padrão
+          envFrom:
+          - configMapRef:
+              name: app-variaveis-ambiente-kube-news
           volumeMounts:
             - name: postgres-data
               mountPath: /var/lib/postgresql/data  # Caminho onde os dados serão armazenados
@@ -47,3 +43,42 @@ spec:
       targetPort: 5432  # Porta do container
   selector:
     app: postgres  # Seleciona pods com
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  kube-news
+  labels:
+    name:  kube-news
+spec:
+  selector:
+    matchLabels:
+      name:  kube-news
+  template:
+    metadata:
+      labels:
+        name:  kube-news
+    spec:
+      containers:
+      - image:  oalexandrino/k8s-kube-news:latest
+        name:  kube-news
+        ports:
+        - containerPort: 8080
+        envFrom:
+          - configMapRef:
+              name: app-variaveis-ambiente-kube-news
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name:  kube-news
+spec:
+  selector:
+    app:  kube-news
+  type: NodePort
+  ports:
+  - name:  http
+    port:  80
+    targetPort:  8080
+    nodePort:  30000
