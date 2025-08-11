@@ -44,32 +44,7 @@ spec:
   selector:
     app: postgres  # Seleciona pods com
 
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name:  kube-news
-  labels:
-    name:  kube-news
-spec:
-  selector:
-    matchLabels:
-      name:  kube-news
-  template:
-    metadata:
-      labels:
-        name:  kube-news
-    spec:
-      containers:
-      - image:  oalexandrino/k8s-kube-news:latest
-        name:  kube-news
-        ports:
-        - containerPort: 8080
-        envFrom:
-          - configMapRef:
-              name: app-variaveis-ambiente-kube-news
----
-kind: Service
+
 apiVersion: v1
 metadata:
   name:  kube-news
