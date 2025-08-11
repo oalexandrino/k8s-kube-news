@@ -82,6 +82,11 @@ Para configurar a aplicação, defina as seguintes variáveis de ambiente:
    ```
 5. Acesse a aplicação em [http://localhost:8080](http://localhost:8080)
 
+### Criação da imagem
+
+docker build -t oalexandrino/k8s-kube-news:latest --push .
+docker build -t oalexandrino/k8s-kube-news:vi --push .
+
 ### População de Dados de Exemplo
 
 Utilize o arquivo `popula-dados.http` para inserir notícias de exemplo:
