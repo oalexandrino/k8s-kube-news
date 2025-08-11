@@ -6,9 +6,6 @@ nodes:
       - containerPort: 30000
         hostPort: 30000
         protocol: TCP
-    extraMounts:
-      - hostPath: D:/DEV/kubernetes/PVC/postgre
-        containerPath: /mnt/postgres-data
   - role: control-plane
   - role: worker
   - role: worker
