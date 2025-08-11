@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: app-variaveis-ambiente-kube-news-app
+  name: app-variaveis-ambiente-kubenews
 data:
   DB_DATABASE: "kube_news"
   DB_USERNAME: "kubeuser"
@@ -63,34 +63,34 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kube-news-app
+  name: kubenews
 spec:
   selector:
     matchLabels:
-      app: kube-news-app
+      app: kubenews
   template:
     metadata:
       labels:
-        app: kube-news-app
+        app: kubenews
     spec:
       containers:
-      - name: kube-news-app
+      - name: kubenews
         image: oalexandrino/k8s-kube-news:v1
         ports:
         - containerPort: 8080
         envFrom:
         - configMapRef:
-            name: app-variaveis-ambiente-kube-news-app
+            name: app-variaveis-ambiente-kubenews
 
 ---
 
 apiVersion: v1
 kind: Service
 metadata:
-  name: kube-news-app
+  name: kubenews
 spec:
   selector:
-    app: kube-news-app
+    app: kubenews
   ports:
     - port: 80
       targetPort: 8080
