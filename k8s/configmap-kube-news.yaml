@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: app-variaveis-ambiente-kube-news-app
-data:
-  DB_DATABASE: "kube_news"
-  DB_USERNAME: "kubeuser"
-  DB_PASSWORD: "kubepassword"
-  DB_HOST: "postgresql"
