@@ -3,11 +3,10 @@ kind: ConfigMap
 metadata:
   name: app-variaveis-ambiente-kube-news-app
 data:
-  DB_HOST: "postgresql"
-  DB_PORT: "5432"
-  DB_NAME: "kube_news"
-  DB_USER: "kubeuser"
+  DB_DATABASE: "kube_news"
+  DB_USERNAME: "kubeuser"
   DB_PASSWORD: "kubepassword"
+  DB_HOST: "postgresql"  # Nome do serviço PostgreSQL
 
 ---
 
