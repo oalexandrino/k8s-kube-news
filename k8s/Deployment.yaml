@@ -34,3 +34,42 @@ spec:
   ports:
     - port: 5432  # Porta exposta pelo service
       targetPort: 5432  # Porta do container
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kube-news-app
+spec:
+  selector:
+    matchLabels:
+      app: kube-news-app
+  template:
+    metadata:
+      labels:
+        app: kube-news-app
+    spec:
+      containers:
+      - name: kube-news-app
+        image: oalexandrino/k8s-kube-news:v1
+        ports:
+        - containerPort: 8080
+        envFrom:
+        - configMapRef:
+            name: app-variaveis-ambiente-kube-news-app
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: kube-news-app
+spec:
+  selector:
+    app: kube-news-app
+  ports:
+    - port: 80
+      targetPort: 8080
+      nodePort: 30000
+  type: NodePort
