@@ -73,6 +73,13 @@ spec:
       labels:
         app: kubenews
     spec:
+      initContainers:
+        - name: wait-for-postgres
+          image: postgres:15
+          command: ["sh", "-c", "until pg_isready -h $DB_HOST -p 5432; do echo esperando o banco...; sleep 2; done"]
+          envFrom:
+            - configMapRef:
+                name: app-variaveis-ambiente-kubenews    
       containers:
       - name: kubenews
         image: oalexandrino/k8s-kube-news:v1
