@@ -16,10 +16,9 @@ kind: ConfigMap
 metadata:
   name: app-variaveis-ambiente-kube-news-postgres
 data:
-  DB_DATABASE: "kube_news"
-  DB_USERNAME: "kubeuser"
-  DB_PASSWORD: "kubepassword"
-  DB_HOST: "postgresql"  # Nome do serviço do PostgreSQL
+  POSTGRES_DB: "kube_news"
+  POSTGRES_USER: "kubeuser"
+  POSTGRES_PASSWORD: "kubepassword"
 
 ---
 
@@ -38,7 +37,7 @@ spec:
     spec:
       containers:
         - name: postgresql  # Nome do container
-          image: postgres:16
+          image: postgres:15
           ports:
             - containerPort: 5432  
           envFrom:
