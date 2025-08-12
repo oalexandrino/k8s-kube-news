@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgresql  
+spec:
+  selector:
+    matchLabels:
+      app: postgresql  
+  template:
+    metadata:
+      labels:
+        app: postgresql 
+    spec:
+      containers:
+        - name: postgresql  # Nome do container
+          image: postgres:15
+          ports:
+            - containerPort: 5432  
+          envFrom:
+          - configMapRef:
+              name: env-kubedev-news-postgres
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: secret-kubedev-news-app-and-postgre
+                  key: POSTGRES_PASSWORD

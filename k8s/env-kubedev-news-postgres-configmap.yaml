@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: env-kubedev-news-postgres
+data:
+  POSTGRES_DB: "kube_news"
+  POSTGRES_USER: "kubeuser"
