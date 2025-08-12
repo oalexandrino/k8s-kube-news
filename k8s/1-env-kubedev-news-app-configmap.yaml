@@ -5,4 +5,4 @@ metadata:
 data:
   DB_DATABASE: "kube_news"
   DB_USERNAME: "kubeuser"
-  DB_HOST: "postgresql"  # Nome do serviço PostgreSQL
+  DB_HOST: "postgresql"

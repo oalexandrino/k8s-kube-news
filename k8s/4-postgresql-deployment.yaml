@@ -12,7 +12,7 @@ spec:
         app: postgresql 
     spec:
       containers:
-        - name: postgresql  # Nome do container
+        - name: postgresql 
           image: postgres:15
           ports:
             - containerPort: 5432  

@@ -1,12 +1,10 @@
-# Service para expor o PostgreSQL internamente no cluster
-
 apiVersion: v1
 kind: Service
 metadata:
-  name: postgresql  # Nome do service
+  name: postgresql  
 spec:
   selector:
-    app: postgresql  # Seleciona pods com
+    app: postgresql 
   ports:
-    - port: 5432  # Porta exposta pelo service
-      targetPort: 5432  # Porta do container
+    - port: 5432
+      targetPort: 5432 
